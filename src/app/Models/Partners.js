@@ -1,7 +1,11 @@
 const env = require("dotenv").config();
 const mongoose = require("mongoose");
+const dbConnection =
+  process.env.NODE_ENV === "test"
+    ? process.env.MONGODB_CONNECTION_TEST
+    : process.env.MONGODB_CONNECTION;
 
-mongoose.connect(process.env.MONGODB_CONNECTION, {
+mongoose.connect(dbConnection, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
