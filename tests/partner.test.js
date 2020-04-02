@@ -1,32 +1,24 @@
-// describe("Defining variables", () => {
-//   const OLD_ENV = process.env;
+const express = require("express");
+const app = express();
+const request = require("supertest");
+const env = require("dotenv").config();
+const url = `${process.env.URL}:${process.env.PORT}`;
 
-//   beforeEach(() => {
-//     jest.resetModules(); // this is important - it clears the cache
-//     process.env = { ...OLD_ENV };
-//     delete process.env.NODE_ENV;
-//   });
-
-//   afterEach(() => {
-//     process.env = OLD_ENV;
-//   });
-
-//   test("will receive process.env variables", () => {
-//     // set the variables
-//     process.env.NODE_ENV = "dev";
-//     process.env.PROXY_PREFIX = "/new-prefix/";
-//     process.env.API_URL = "https://new-api.com/";
-//     process.env.APP_PORT = "7080";
-//     process.env.USE_PROXY = "false";
-
-//     const testedModule = require("../../config/env").default;
-
-//     // ... actual testing
-//   });
-// });
-
-describe("Sample Test", () => {
-  it("should test that true === true", () => {
-    expect(true).toBe(true);
+describe("Get Partners", () => {
+  it("should respond with a json 200 response with URL in request", function(done) {
+    request(url)
+      .get("/partners")
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .end(done);
+  });
+  it("should respond with a json 200 response sending LAT/LNG", function(done) {
+    request(url)
+      .get("/partners?lat=-23.5503099&lng=-46.6363896")
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .end(done);
   });
 });
