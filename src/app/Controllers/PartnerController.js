@@ -20,12 +20,11 @@ exports.get = function(req, res, next) {
         }
       }
     }).find((error, results) => {
-      console.log(error);
-      console.log(results);
+      // console.log(error);
+      // console.log(results);
       if (error) console.log(error);
       return res.status(200).json(results);
     });
-    return;
 
     // filters = {
     //   location: {
