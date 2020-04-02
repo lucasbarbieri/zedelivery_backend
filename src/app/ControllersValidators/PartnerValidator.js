@@ -1,14 +1,14 @@
 const yup = require("yup");
 const {
-  validateCobertura,
+  validateCoverageArea,
   validateAddress
 } = require("../../helpers/validators");
 
-yup.addMethod(yup.string, "cobertura", function(message) {
+yup.addMethod(yup.string, "coverageArea", function(message) {
   return yup
     .mixed()
-    .test("cobertura", message || "Cobertura inválida", value =>
-      validateCobertura(value)
+    .test("coverageArea", message || "Invalid coverage area", value =>
+      validateCoverageArea(value)
     );
 });
 
@@ -24,8 +24,8 @@ exports.store = async function(data) {
   let schema = yup.object().shape({
     tradingName: yup.string().required(),
     ownerName: yup.string().required(),
-    documento: yup.string().required(),
-    cobertura: yup.string().cobertura(),
+    document: yup.string().required(),
+    coverageArea: yup.string().coverageArea(),
     address: yup.string().address()
   });
 

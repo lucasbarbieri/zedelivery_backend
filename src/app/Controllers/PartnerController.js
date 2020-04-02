@@ -9,9 +9,10 @@ exports.get = function(req, res, next) {
     const lng = parseFloat(req.query.lng);
 
     Model.find({
-      location: {
+      address: {
         $near: {
-          $maxDistance: 1000,
+          $maxDistance: 20000000,
+          $minDistance: 100,
           $geometry: {
             type: "Point",
             coordinates: [lng, lat]
@@ -19,6 +20,8 @@ exports.get = function(req, res, next) {
         }
       }
     }).find((error, results) => {
+      console.log(error);
+      console.log(results);
       if (error) console.log(error);
       return res.status(200).json(results);
     });
@@ -59,7 +62,7 @@ exports.getById = function(req, res, next) {
 };
 
 exports.store = async function(req, res, next) {
-  const { tradingName, ownerName, documento, cobertura, address } = req.body;
+  const { tradingName, ownerName, document, coverageArea, address } = req.body;
   const validator = await Validators.store(req.body);
 
   if (!validator.valid) {
@@ -67,7 +70,7 @@ exports.store = async function(req, res, next) {
   }
 
   Model.create(
-    { tradingName, ownerName, documento, cobertura, address },
+    { tradingName, ownerName, document, coverageArea, address },
     function(err, data) {
       if (err) {
         return res.status(400).json({
