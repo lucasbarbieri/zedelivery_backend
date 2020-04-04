@@ -23,7 +23,6 @@ exports.get = function(req, res, next) {
       if (error) console.log(error);
       return res.status(200).json(results);
     });
-    return;
   }
 
   Model.find(filters, function(err, data) {
