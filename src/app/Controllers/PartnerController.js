@@ -11,7 +11,7 @@ exports.get = function(req, res, next) {
     Model.find({
       address: {
         $near: {
-          $maxDistance: 20000000,
+          $maxDistance: 5000,
           $minDistance: 100,
           $geometry: {
             type: "Point",
@@ -20,24 +20,10 @@ exports.get = function(req, res, next) {
         }
       }
     }).find((error, results) => {
-      console.log(error);
-      console.log(results);
       if (error) console.log(error);
       return res.status(200).json(results);
     });
     return;
-
-    // filters = {
-    //   location: {
-    //     $near: {
-    //       $maxDistance: 1000,
-    //       $geometry: {
-    //         type: "Point",
-    //         coordinates: [lng, lat]
-    //       }
-    //     }
-    //   }
-    // };
   }
 
   Model.find(filters, function(err, data) {
