@@ -27,7 +27,7 @@ yarn test
 Para criação de um novo parceiro o endpoint /partners com método POST deve ser utilizado. Conforme o exemplo abaixo:
 
 ```javascript
-URL: http://localhost:3001/partners
+URL: 'http://localhost:3001/partners'
 METHOD: POST
 PAYLOAD:
 {
@@ -61,8 +61,8 @@ PAYLOAD:
 Para recuperar um parceiro o endpoint /partners/:id com método GET. Conforme o exemplo abaixo:
 
 ```javascript
-//localhost:3001/partners/5e8a29bffef3945ecdcad984
-URL: http: http: METHOD: GET;
+URL: "http://localhost:3001/partners/5e8a29bffef3945ecdcad984";
+METHOD: GET;
 PAYLOAD: {
 }
 ```
@@ -72,8 +72,8 @@ PAYLOAD: {
 Para recuperar um parceiro o endpoint /partners?lat=-23.4736669&lng=-46.6150915 com método GET. Conforme o exemplo abaixo:
 
 ```javascript
-//localhost:3001/partners?lat=-23.4736669&lng=-46.6150915
-URL: http: http: METHOD: GET;
+URL: "http://localhost:3001/partners?lat=-23.4736669&lng=-46.6150915";
+METHOD: GET;
 PAYLOAD: {
 }
 ```
