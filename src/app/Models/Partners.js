@@ -1,9 +1,9 @@
-const env = require("../../env");
+const connectionString = require("../../../db");
 const mongoose = require("mongoose");
 
-mongoose.connect(env.MONGODB_CONNECTION, {
+mongoose.connect(connectionString, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 
 mongoose.set("useCreateIndex", true);
@@ -11,26 +11,26 @@ mongoose.set("useCreateIndex", true);
 const schema = new mongoose.Schema({
   tradingName: {
     type: String,
-    required: true
+    required: true,
   },
   ownerName: {
     type: String,
-    required: true
+    required: true,
   },
   document: {
     type: String,
-    required: true
+    required: true,
   },
   coverageArea: {
     type: {
-      type: String
+      type: String,
     },
-    coordinates: []
+    coordinates: [],
   },
   address: {
     type: { type: String },
-    coordinates: []
-  }
+    coordinates: [],
+  },
 });
 
 schema.index({ address: "2dsphere" });

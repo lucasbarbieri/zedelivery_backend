@@ -1,5 +1,5 @@
 {
-  "name": "linkapitest",
+  "name": "zedeliverybackend",
   "version": "1.0.0",
   "description": "",
   "dependencies": {
@@ -25,7 +25,7 @@
   },
   "scripts": {
     "test": "cross-env NODE_ENV=test jest",
-    "dev": "nodemon server.js",
+    "dev": "cross-env NODE_ENV=dev nodemon server.js",
     "start": "nodemon ./bin/server.js"
   },
   "keywords": [],
