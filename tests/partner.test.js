@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const app = require("../src/app");
 const supertest = require("supertest");
 const request = supertest(app);
+const { generateFakeCNPJ } = require("../src/helpers/generators");
 
 afterAll((done) => {
   mongoose.connection.close();
@@ -35,7 +36,7 @@ describe("Create Partner", () => {
       .send({
         tradingName: nameTest,
         ownerName: `Joana Teodora Sampaio ${Math.random()}`,
-        document: "99999999999999",
+        document: generateFakeCNPJ(),
         coverageArea: {
           type: "MultiPolygon",
           coordinates: [

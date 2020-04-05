@@ -44,23 +44,27 @@ exports.getById = function (req, res, next) {
 };
 
 exports.store = async function (req, res, next) {
-  const { tradingName, ownerName, document, coverageArea, address } = req.body;
-  const validator = await Validators.store(req.body);
+  let postData = ({
+    tradingName,
+    ownerName,
+    document,
+    coverageArea,
+    address,
+  } = req.body);
+  postData.document = postData.document.replace(/[^A-Z0-9]+/gi, "");
+  const validator = await Validators.store(postData);
 
   if (!validator.valid) {
     console.log(validator.message);
     return res.status(422).json({ error: validator.message });
   }
 
-  Model.create(
-    { tradingName, ownerName, document, coverageArea, address },
-    function (err, data) {
-      if (err) {
-        return res.status(400).json({
-          error: err,
-        });
-      }
-      return res.status(201).json(data);
+  Model.create(postData, function (err, data) {
+    if (err) {
+      return res.status(400).json({
+        error: err,
+      });
     }
-  );
+    return res.status(201).json(data);
+  });
 };
